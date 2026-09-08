@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .hover-under-line .nav-link {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin-right: 50px;
+    font-size: 20px;
+}
+
+.hover-under-line .nav-link::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: -0px;   /* ចម្ងាយពីអក្សរ */
+
+    width: 90%;
+    height: 1px;
+
+    background: black;
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition: transform 0.4s ease;
+}
+
+.hover-under-line .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+    </style>
+  </head>
+  <body class="p-3 m-0 border-0 bd-example m-0 border-0">
+    <!-- Example Code Start-->
+    <nav class="navbar navbar-expand-lg " style="background-color: #e3f2fd; border-radius: 10px; " data-bs-theme="light">
+      <div class="container-fluid">
+        <a style="
+                margin-right: 50px;
+                font-weight: 600;
+                max-width: 100%;
+                background:linear-gradient(to right ,red , blue);
+                background-clip: text;
+                color: transparent;
+                text-align: center;
+            " class="navbar-brand" href="#">Generation <br> Shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse hover-under-line" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Clothes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hats</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bags</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Shoeses</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Example Code End -->
+  </body>
+</html>
