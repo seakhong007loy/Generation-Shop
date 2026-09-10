@@ -1,13 +1,85 @@
-{% extends 'layout.html' %}
-
-
-{% block title %}
-    
-{% endblock title %}
-    
-
+{% extends 'layout.html' %}    
 
 {% block content %}
-    
+<style>
+    .like-button {
+        border: none;
+        background: none;
+        font-size: 35px;
+        cursor: pointer;
+        color: gray;
+        transition: transform 0.2s;
+    }
+    .like-button:hover {
+        transform: scale(1.1);
+    }
+
+    .like-button.liked {
+        color: red;
+    }   
+    .staff_box{
+        width: 260px;
+        height: 480px;
+        border: 1px solid rgb(77, 16, 16);
+        border-radius: 10px;
+        margin: 15px;
+        margin-left: 75px;
+        float: left;
+        overflow: hidden;
+    }
+    .staff_box:hover{
+    transform: scale(1.05);
+    transition: ease 0.2s;
+    cursor: pointer;
+    }
+    .staff_box img{
+        width: 100%;
+        height: 350px;
+        object-fit: contain;
+        object-position: top;
+    }
+</style>
+   {% for cl in clothes %}
+    <div class="staff_box">
+
+        <img src="/media/{{cl.front_photo}}">
+
+        <div style="margin: 10px;">
+
+            <p>{{cl.names}}</p>
+
+            <div style="float: right;">
+                <a class="btn btn-success" href="/view/{{cl.id}}">
+                        Views
+                </a>
+            </div>
+            <div style="float: left; color: green;">
+                ${{cl.price}}
+
+                <br>
+                 <button class="like-button">
+                    ♡ 
+                </button>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<script>
+    const likeButtons = document.querySelectorAll('.like-button');
+
+    likeButtons.forEach(button => {
+
+        button.addEventListener('click', () => {
+
+            button.classList.toggle('liked');
+
+            if (button.classList.contains('liked')) {
+                button.textContent = '♥';
+            } else {
+                button.textContent = '♡';
+            }
+        });
+    });
+</script>
+
 {% endblock content %}
-    
