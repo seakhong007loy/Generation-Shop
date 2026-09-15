@@ -1,13 +1,673 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 
 {% block title %}
-    
+    New Generation Shop
 {% endblock title %}
-    
-
 
 {% block content %}
+
+<style>
+    /* =========================
+       GLOBAL
+    ========================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Poppins", sans-serif;
+        background: #f5f7fb;
+        color: #1e2139;
+       
+    }
+
+    img {
+        max-width: 85%;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .small-container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 0px;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+
+    /* =========================
+       HERO SECTION
+    ========================= */
+
+    .header {
+        margin: 20px auto 0;
+   
+
+    }
+
+    .header .row {
+        padding: 70px 60px;
+        min-height: 660px;
+    }
+
+    .col-2 {
+        width: 50%;
+    }
+
+    .hero-text {
+        color: rgb(0, 0, 0);
+    }
+
+    .hero-text h1 {
+        font-size: 48px;
+        line-height: 1.15;
+        margin-bottom: 25px;
+        font-weight: 700;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+        line-height: 1.8;
+        max-width: 500px;
+        color: rgba(0, 0, 0, 0.9);
+    }
+
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn1 {
+        display: inline-block;
+
+        margin-top: 30px;
+        padding: 13px 32px;
+
+        background: white;
+        color: #6648a8;
+
+        border-radius: 30px;
+
+        text-decoration: none;
+        font-weight: 600;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.15);
+
+        transition: all 0.3s ease;
+    }
+
+    .btn1:hover {
+        transform: translateY(-4px);
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, 0.25);
+
+        color: #54358f;
+    }
+
+
+    /* =========================
+       HERO IMAGE
+    ========================= */
+
+    .hero-image img {
+        width: 85%;
+        max-width: 500px;
+        height: 470px;
+
+        object-fit: cover;
+
+        border-radius: 25px  ;
+
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, 0.1);
+
+        transition: all 0.4s ease;
+    }
+
+    .hero-image img:hover {
+        transform: translateY(-8px);
+        box-shadow:
+            0 30px 70px rgba(0, 0, 0, 0.35);
+    }
+
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories {
+        padding: 70px 0 30px;
+    }
+
+    .categories .row {
+        gap: 25px;
+    }
+
+    .col-3 {
+        flex: 1;
+        min-width: 250px;
+        height: 30vh;
+    }
+
+    .col-3 img {
+        width: 100%;
+        height: 300px;
+
+        object-fit: cover;
+
+        border-radius: 18px;
+
+        transition: all 0.35s ease;
+    }
+
+    .col-3 img:hover {
+        transform: translateY(-8px);
+
+        box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+
+    /* =========================
+       FEATURED PRODUCTS
+    ========================= */
+
+    .products-section {
+        padding: 50px 0 80px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .products-row {
+        align-items: stretch;
+        gap: 20px;
+    }
+
+
+    /* =========================
+       PRODUCT CARD
+    ========================= */
+
+    .col-4 {
+        flex: 1;
+        min-width: 240px;
+
+        background: white;
+
+        padding: 15px;
+
+        border-radius: 18px;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.08);
+
+        transition: all 0.35s ease;
+    }
+
+    .col-4:hover {
+        transform: translateY(-10px);
+
+        box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* =========================
+       PRODUCT IMAGE
+    ========================= */
+
+    .col-4 img {
+        width: 190px;
+        height: 250px;
+
+        margin: 10px auto;
+
+        object-fit: cover;
+
+        display: block;
+
+        border-radius: 14px;
+
+        transition: all 0.35s ease;
+    }
+
+    .col-4:hover img {
+        transform: scale(1.02);
+    }
+
+.title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+}
+.title::after{
+    content: '';
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position:absolute;
+    bottom: 0;
+    left:46%;
+    transform: translateY(-50%);
+}
+.title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+}
+.title::after{
+    content: '';
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position:absolute;
+    bottom: 0;
+    left:46%;
+    transform: translateY(-50%);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #25272c;
+    color: white;
+    margin-top: 60px;
+    padding-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 30px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.footer-box {
+    flex: 1;
+}
+
+.footer-box h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-box h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-box p {
+    color: #bdbdbd;
+    line-height: 1.6;
+}
+
+.footer-box a {
+    display: block;
+    color: #bdbdbd;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.footer-box a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+.bran-logo{
+    gap: 40px;
+    text-align: center;
+    justify-content: center;
+    margin-left: 340px;
+    width: 300px;
+    height: 136px;
+    display: flex;
+}
+
+</style>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+
+    <div class="container">
+        
+        <div class="header">
+            
+            <div class="row">
+                
+                <div class="col-2 hero-text">
+                    
+                    <h1>
+                    Change Your Outfit<br>
+                    Discover Your Style
+                </h1>
+                
+                <p>
+                    Choose clothes, bags, hats and shoes
+                    that match your personality and create
+                    your own confident style.
+                </p>
+                
+                <a href="" class="btn1">
+                    Explore Now →
+                </a>
+                
+            </div>
+            
+            
+            <div class="col-2 hero-image">
+                
+                <img
+                src="https://i.pinimg.com/736x/9f/4f/94/9f4f948389d6af3fca69788b1148c337.jpg"
+                alt="New Generation Shop"
+                >
+                
+            </div>
+            
+        </div>
+        
+    </div>
+
+<!-- =========================
+FEATURED CATEGORIES
+========================= -->
+
+<div class="categories">
     
+    <div class="small-container">
+        
+        <div class="row">
+            
+            <div class="col-3">
+                <img
+                src="https://i.pinimg.com/1200x/8f/45/a4/8f45a404df92c7050bfd1675d4fb4efc.jpg"
+                alt="Clothing"
+                >
+            </div>
+            
+            <div class="col-3">
+                <img
+                src="https://i.pinimg.com/1200x/2e/36/d7/2e36d789d6e0315d1bac8012b239d688.jpg"
+                alt="Fashion"
+                >
+            </div>
+
+            <div class="col-3">
+                <img
+                src="https://i.pinimg.com/736x/8e/ac/81/8eac81a5b0e7bd200729488beb92cb03.jpg"
+                alt="Accessories"
+                >
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+<!-- =========================
+FEATURED PRODUCTS
+========================= -->
+
+<div class="products-section">
+    
+    <div class="small-container">
+        
+        <div class="section-title">
+            
+            <h2 class="title">Featured Products</h2>
+            
+        
+        </div>
+        
+
+        <div class="row products-row">
+            
+
+            <!-- PRODUCT 1 -->
+            
+            <div class="col-4">
+                
+                <img
+                src="https://i.pinimg.com/736x/a3/de/14/a3de14d8b06a38686e0947f1a7472563.jpg"
+                    alt="SHEIN Boys"
+                    >
+                    
+                    <h4>
+                        SHEIN Boys
+                </h4>
+
+                <div class="rating">
+                    
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    
+                </div>
+
+                <p>$23.00</p>
+                
+            </div>
+            
+            
+            <!-- PRODUCT 2 -->
+            
+            <div class="col-4">
+                
+                <img
+                src="https://i.pinimg.com/1200x/f5/c8/3c/f5c83c9bb66e2a0ad6090f565ca0087a.jpg"
+                alt="Men's Baseball Cap"
+                >
+                
+                <h4>
+                   Baseball Cap
+                </h4>
+                
+                <div class="rating">
+                    
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    
+                </div>
+                
+                <p>$35.00</p>
+                
+            </div>
+            
+            
+            <!-- PRODUCT 3 -->
+            
+            <div class="col-4">
+                
+                <img
+                src="https://i.pinimg.com/736x/99/50/da/9950da77df08d53918d079a598568377.jpg"
+                alt="Black Bag"
+                >
+                
+                <h4>
+                    Bag
+                </h4>
+                
+                <div class="rating">
+                    
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    
+                </div>
+                
+                <p>$21.00</p>
+                
+            </div>
+            
+            
+            <!-- PRODUCT 4 -->
+            
+            <div class="col-4">
+
+                <img
+                    src="https://i.pinimg.com/736x/e8/20/c6/e820c6fdf896f9352960ab0918e0bfe6.jpg"
+                    alt=" "
+                    >
+                    
+                    <h4>
+                         WINFOX 
+                    </h4>
+                    
+                    <div class="rating">
+                        
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        
+                    </div>
+                    
+                    <p>$55.00</p>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+<!--- offer --->
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src="https://i.pinimg.com/736x/62/0e/a6/620ea60fa10755f0f9e9d77e93d7626f.jpg" alt=""></div>
+            <div class="col-2">
+                <p>Available one New Generation Shop</p>
+                <h1>Brown Cross-Strap Leather Sandals</h1>
+                <small>Elegant leather sandals featuring a sophisticated X-strap design, embossed branding, comfortable footbed, and adjustable heel strap. Perfect for modern smart-casual styling.</small><br>
+                <a href="" class="btn1">Check It Now! &#8594;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-3">
+        <div class="bran-logo">
+            <img src="https://i.pinimg.com/736x/e7/65/04/e7650458fe434cd647eafb289a569fe2.jpg" alt="">
+            <img src="https://i.pinimg.com/736x/27/e8/0e/27e80eb84e5cc6d65b779b3bd43b9e02.jpg" alt="">
+            <img src="https://i.pinimg.com/1200x/78/7d/af/787daf13dccf0a92e7a5f1596d0c9e6a.jpg" alt=""> 
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-box">
+            <h2>New Generation Shop</h2>
+            <p>
+                Find your favorite shoes with us.
+                Quality style for everyone. <br>
+                Our purpose is to make the pleasure and benefits of outfit accessible to the many.
+            </p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Quick Links</h3>
+            <a href="/">Home</a>
+            <a href="/shoeses/">Shoes</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Follow Us</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 New Generation Shop. All Rights Reserved.</p>
+    </div>
+</footer>
+
 {% endblock content %}
-    
