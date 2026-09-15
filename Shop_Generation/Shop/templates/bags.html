@@ -1,13 +1,103 @@
 {% extends 'layout.html' %}
 
-
-{% block title %}
-    
-{% endblock title %}
-    
-
+{% block title %} Bags Shopping {% endblock title %}
 
 {% block content %}
-    
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 20px;
+    width: 100%;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 340px;
+    background: #ffffff;
+    border: 1px solid #e5d8cc;
+    padding: 25px 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .image-wrapper {
+    width: 250px;
+    height: 270px;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .feature-card:hover .image-wrapper img {
+    transform: scale(1.06);
+  }
+
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 12px; 
+    letter-spacing: 1px;
+  }
+
+  .product-price {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 4px;
+    margin-bottom: 12px; 
+  }
+
+
+  .btn-views {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+</style>
+
+<div class="content-container">
+  {% for bg in bags_list %}
+    <div class="feature-card">
+      <div class="image-wrapper">
+        <img src="/media/{{bg.photo}}" alt="{{bg.names}}">
+      </div>
+      <h3 class="feature-title">{{bg.names}}</h3>
+      <div class="product-price">Price: {{bg.price}}$</div>
+      <a class="btn btn-success btn-views" href="/detail_bags/{{bg.id}}">Views</a>
+    </div>
+  {% endfor %}
+</div>
+
 {% endblock content %}
-     
