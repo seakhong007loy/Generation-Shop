@@ -1,0 +1,499 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Detail Shoeses
+{% endblock title %}
+
+{% block content %}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #ffffff;
+    }
+
+    .main {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 40px 60px;
+        display: flex;
+        gap: 25px;
+        align-items: flex-start;
+    }
+
+    /*LEFT IMAGE SECTION */
+
+    .image_section {
+        width: 42%;
+        display: flex;
+        gap: 15px;
+    }
+
+    .small_images {
+        width: 65px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .small_images img {
+        width: 55px;
+        height: 55px;
+        object-fit: cover;
+        border: 1px solid #cccccc;
+        border-radius: 8px;
+        padding: 3px;
+        cursor: pointer;
+    }
+
+    .small_images img:first-child {
+        border: 2px solid #2874f0;
+    }
+
+    .main_image {
+        width: calc(100% - 100px);
+        height: 500px;
+        background: #f7f7f7;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .main_image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: 0.4s ease;
+    }
+
+    .main_image img:hover {
+        transform: scale(1.04);
+    }
+
+    /* =========================
+       CENTER PRODUCT DETAILS
+    ========================= */
+
+    .container {
+        width: 38%;
+        padding: 5px 10px;
+    }
+
+    .brand {
+        font-size: 14px;
+        font-weight: bold;
+        color: #2874f0;
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-family: Arial, sans-serif;
+        font-size: 27px;
+        font-weight: 500;
+        color: #222222;
+        margin: 0 0 12px;
+        line-height: 1.3;
+    }
+
+    .rating {
+        display: inline-block;
+        background: #f7f9f7;
+        color: rgb(207, 128, 0);
+        padding: 5px 9px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    .rating span {
+        color: #ffffff;
+    }
+
+    .line {
+        border: 0;
+        border-top: 1px solid #dddddd;
+        margin: 10px 0 20px;
+    }
+
+    .price_title {
+        font-size: 14px;
+        color: #666666;
+        margin-bottom: 5px;
+    }
+
+    .price {
+        font-size: 30px;
+        font-weight: bold;
+        color: #111111;
+        margin-bottom: 20px;
+    }
+
+    .detail_title {
+        font-size: 19px;
+        font-weight: bold;
+        color: #222222;
+        margin-top: 25px;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.7;
+        color: #444444;
+        margin: 0;
+    }
+
+    /* =========================
+       RIGHT BUYING PANEL
+    ========================= */
+
+    .buying_panel {
+        width: 250px;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        padding: 20px;
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .delivery {
+        font-size: 14px;
+        color: #333333;
+        margin-bottom: 20px;
+    }
+
+    .delivery strong {
+        display: block;
+        margin-top: 5px;
+        color: #2874f0;
+    }
+
+    .stock {
+        color: #008a00;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .buy_btn,
+    .cart_btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        border-radius: 22px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    .buy_btn {
+        background: #ffd814;
+        color: #111111;
+        border: 1px solid #fcd200;
+    }
+
+    .buy_btn:hover {
+        background: #f7ca00;
+        color: #111111;
+    }
+
+    .cart_btn {
+        background: #ffa41c;
+        color: #111111;
+        border: 1px solid #ff8f00;
+    }
+
+    .cart_btn:hover {
+        background: #ff8f00;
+        color: #111111;
+    }
+
+    .list_btn {
+        display: block;
+        width: 100%;
+        padding: 9px;
+        margin-top: 12px;
+        border: 1px solid #aaaaaa;
+        border-radius: 6px;
+        background: white;
+        color: #333333;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .list_btn:hover {
+        background: #f5f5f5;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+        .main {
+            flex-wrap: wrap;
+        }
+
+        .image_section {
+            width: 55%;
+        }
+
+        .container {
+            width: 45%;
+        }
+
+        .buying_panel {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .main {
+            padding: 20px;
+            display: block;
+        }
+
+        .image_section,
+        .container,
+        .buying_panel {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .main_image {
+            height: 400px;
+        }
+    }
+    /* =========================
+   SIZE SECTION
+========================= */
+
+
+    .size_section {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .size_title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #222;
+        margin-bottom: 10px;
+    }
+
+    .size_title span {
+        font-weight: bold;
+        margin-left: 4px;
+    }
+
+    .size_buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        max-width: 500px;
+    }
+
+    .size_btn {
+        min-width: 52px;
+        height: 38px;
+        padding: 0 12px;
+
+        background: #ffffff;
+        border: 1px solid #aaa;
+        border-radius: 6px;
+
+        color: #222;
+        font-size: 14px;
+
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .size_btn:hover {
+        border-color: #2874f0;
+        background: #f5f9ff;
+    }
+
+    /* Selected size */
+    .size_btn.active {
+        border: 2px solid #2874f0;
+        color: #111;
+        font-weight: bold;
+        background: #ffffff;
+    }
+
+    .size_chart {
+        display: inline-block;
+        margin-top: 14px;
+
+        color: #2874f0;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .size_chart:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+<div class="main">
+
+    <!-- LEFT: PRODUCT IMAGE -->
+    <div class="image_section">
+
+    
+
+        <div class="main_image">
+            <img
+                src="/media/{{ shoeses_detail.photo }}"
+                alt="{{ shoeses_detail.names }}"
+            >
+        </div>
+
+    </div>
+
+
+    <!-- CENTER: PRODUCT INFORMATION -->
+    <div class="container">
+
+        <div class="brand">
+            Brand: Nike
+        </div>
+
+        <h2>
+            {{ shoeses_detail.names }}
+            <div class="rating">
+                4.5 ★★★★★
+            </div>
+        </h2>
+
+
+        <hr class="line">
+        <hr>
+        <div class="price_title">
+            Price
+        </div>
+        <div class="price">
+            ${{ shoeses_detail.price }}
+        </div>
+
+        <!-- SIZE -->
+<div class="size_section">
+
+    <div class="size_title">
+        Size:
+        <span id="selectedSize">11</span>
+    </div>
+
+    <div class="size_buttons">
+
+        <button type="button" class="size_btn">7</button>
+        <button type="button" class="size_btn">7.5</button>
+        <button type="button" class="size_btn">8</button>
+        <button type="button" class="size_btn">8.5</button>
+        <button type="button" class="size_btn">9</button>
+        <button type="button" class="size_btn">10</button>
+        <button type="button" class="size_btn">10.5</button>
+        <button type="button" class="size_btn active">11</button>
+        <button type="button" class="size_btn">11.5</button>
+        <button type="button" class="size_btn">12</button>
+
+    </div>
+
+    <a href="#" class="size_chart">Size Chart⌄</a>
+
+</div>
+
+        <hr class="line">
+
+        <div class="detail_title">
+            Product Details
+            <hr>
+        </div>
+        <p>
+            {{ shoeses_detail.detail }}
+        </p>
+        <div class="detail_title">
+            About this item
+            <hr>
+        </div>
+
+        <p>
+            Premium shoes designed for comfort, style,
+            and everyday use.
+        </p>
+
+    </div>
+
+
+    <!-- RIGHT: BUYING BOX -->
+    <div class="buying_panel">
+
+        <div class="price">
+            ${{ shoeses_detail.price }}
+        </div>
+
+        <div class="delivery">
+            📍 Deliver
+            <strong>to Cambodia</strong>
+        </div>
+
+        <div class="stock">
+            ✓ In Stock
+        </div>
+
+        <a href="#" class="buy_btn">
+            Buy Now
+        </a>
+
+        <a href="#" class="cart_btn">
+            Add to Cart
+        </a>
+
+        <a href="#" class="list_btn">
+            Add to List
+        </a>
+
+    </div>
+
+</div>
+<script>
+
+    const sizeButtons = document.querySelectorAll(".size_btn");
+    const selectedSize = document.getElementById("selectedSize");
+
+    sizeButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            // Remove active from all buttons
+            sizeButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            // Add active to clicked button
+            this.classList.add("active");
+
+            // Show selected size
+            selectedSize.textContent = this.textContent;
+
+        });
+
+    });
+
+</script>
+{% endblock content %}
