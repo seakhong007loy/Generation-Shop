@@ -1,0 +1,53 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    Hat Shop
+{% endblock title %}
+
+{% block content %}
+<style> 
+ .hats_box { width: 400px; 
+    height: 500px;
+    border: 1px solid rgb(77, 16, 16);
+    border-radius: 10px; 
+    margin: 15px;
+    float: left;
+    overflow: hidden;
+    background: white; 
+    transition: all 0.4s ease;
+    animation: showCard 0.8s ease; } 
+.hats_box:hover { transform: translateY(-10px) scale(1.02);
+         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+         border-color: rgb(19, 34, 192); } 
+.hats_box img {
+         width: 400px;
+          height: 350px;
+           object-fit:cover;
+            transition: transform 0.5s ease; } 
+.hats_box:hover img { transform: scale(1.1); } 
+.hats_box h3 { transition: color 0.3s ease; } 
+.hats_box:hover h3 { color: rgb(77, 16, 16); } 
+.more-btn { display: inline-block; transition: all 0.3s ease; } 
+.more-btn:hover { transform: scale(1.1); } 
+    @keyframes showCard 
+    { from { opacity: 0; transform: translateY(40px); }
+     to { opacity: 1; transform: translateY(0); } } 
+    .clear { clear: both; } 
+</style>
+   {% for h in list %}
+    <div class="hats_box">
+         <img src="/media/{{h.photo}}">
+         <div style="margin: 10px;">
+         <h3> {{h.names}}</h3>
+         <h3> {{h.price}}$</h3>
+         <div style="clear: both;"></div>
+         <div style="float: left;"></div>
+         <div style="float: right;color:rgb(24, 214, 24)"></div>
+         <a    class="btn btn-outline-success" href="/more/{{h.id}}">More</a>
+
+        </div>
+    </div>
+    {% endfor %}
+{% endblock content %}
+

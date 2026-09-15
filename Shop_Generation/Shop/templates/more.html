@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %} 
+{{more.names}} 
+{% endblock title %}
+
+{% block content %}
+   <div style="width: 35%;float:left">
+      <img style="width: 100%;" src="/media/{{more.photo}}">
+   </div>
+   <div style="float: left;padding-left: 25px;width: 50%;margin:20px">
+      <h2>{{more.names}}</h2>
+      <h3> Price: {{more.price}}$</h3>
+      <p>{{more.more}}</p>
+   </div>
+{% endblock content %}
